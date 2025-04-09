@@ -7,6 +7,43 @@ local HttpService = game:GetService("HttpService")
 local LocalPlayer = Players.LocalPlayer
 local Camera = Workspace.CurrentCamera
 
+local moderatorIds = { -- curr list of moderators who view RAC flags and reports
+    2620089934,
+    85159204,
+    95419416,
+    96688361,
+    260036781,
+    90807940,
+    9624991,
+    291643630,
+    71305063,
+    1095419,
+    430335792,
+    9486667,
+}
+
+local function checkForModerators()
+    local detected = false
+    for _, player in pairs(Players:GetPlayers()) do
+        if table.find(moderatorIds, player.UserId) then
+            detected = true
+            library:Notify("Moderator detected: " .. player.Name .. " (ID: " .. player.UserId .. ")", 5, "warning")
+        end
+    end
+    
+    if detected then
+        library:Notify("Moderator present in game! Use with caution!", 5, "error")
+    end
+    return detected
+end
+
+spawn(function()
+    while true do
+        checkForModerators()
+        wait(3)
+    end
+end)
+
 library:Init({
     version = "4",
     title = "V4",
@@ -327,7 +364,7 @@ local function updateViewmodel()
     end
 end
 
-local AimbotTab = library:NewTab("Aimbot")
+local AimbotTab = library:NewTab("Combat")
 AimbotTab:NewSection("Aimbot Settings")
 AimbotTab:NewToggle("Aimbot", false, function(v) aimbotEnabled = v updateConfig() end):AddKeybind(Enum.UserInputType.MouseButton2)
 AimbotTab:NewToggle("Show FOV", false, function(v) fovEnabled = v updateConfig() end)
@@ -455,9 +492,12 @@ end)
 
 local function cleanup()
     fovDrawing:Remove()
-    for _, connection in pairs(_G.rapehookConnections) do connection:Disconnect() end
-    _G.israpehookLoaded = false
+    for _, connection in pairs(_G.rapehookConnections) do 
+        connection:Disconnect() 
+    end
+    _G.israpehookyLoaded = false
 end
+
 game:GetService("Players").LocalPlayer.OnTeleport:Connect(cleanup)
 game:GetService("CoreGui").ChildRemoved:Connect(function(child)
     if child.Name == "RapeHook" then cleanup() end
