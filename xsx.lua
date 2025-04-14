@@ -39,7 +39,7 @@ local library = {
 	BlurSize = 24,
 	FieldOfView = CurrentCam.FieldOfView,
 
-	Key = {Enum.KeyCode.RightShift, Enum.KeyCode.Insert},
+	Key = UserInputService.TouchEnabled and Enum.KeyCode.RightShift or Enum.KeyCode.Insert,
 	fps = 0,
 	Debug = true,
 
