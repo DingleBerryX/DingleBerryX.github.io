@@ -37,23 +37,23 @@ end)
 library:Init({
     version = "4.2",
     title = "V4.2",
-    company = "VrilHook",
+    company = "RapeHook",
     keybind = Enum.KeyCode.Insert,
     BlurEffect = true
 })
 
-library:Watermark("VrilHook V4.2")
+library:Watermark("RapeHook V4.2")
 local FPSWatermark = library:Watermark("FPS")
 RunService.RenderStepped:Connect(function(v) FPSWatermark:SetText("FPS: " .. math.round(1 / v)) end)
-if _G.isVrilhookLoaded then
-    for _, connection in pairs(_G.VrilhookConnections or {}) do connection:Disconnect() end
+if _G.isRapehookLoaded then
+    for _, connection in pairs(_G.RapehookConnections or {}) do connection:Disconnect() end
 end
 for i,v in pairs(1, 15) do
-    library:Notify("VrilHook V4.2 loaded!", 10, "info")
+    library:Notify("RapeHook V4.2 loaded!", 10, "info")
 end
 
-_G.isVrilhookLoaded = true
-_G.VrilhookConnections = {}
+_G.isRapehookLoaded = true
+_G.RapehookConnections = {}
 
 local ffaMode = false
 local espEnabled = false
@@ -186,7 +186,7 @@ local function createBoxESP(player)
             for _, drawing in pairs(espGroup) do drawing.Visible = false end
         end
     end
-    table.insert(_G.VrilhookConnections, RunService.RenderStepped:Connect(updateESP))
+    table.insert(_G.RapehookConnections, RunService.RenderStepped:Connect(updateESP))
     player.CharacterRemoving:Connect(function()
         for _, drawing in pairs(espGroup) do drawing:Remove() end
     end)
@@ -241,7 +241,7 @@ local function createSkeletonESP(player)
             end
         end
     end
-    table.insert(_G.VrilhookConnections, RunService.RenderStepped:Connect(updateSkeleton))
+    table.insert(_G.RapehookConnections, RunService.RenderStepped:Connect(updateSkeleton))
     player.CharacterRemoving:Connect(function()
         for _, line in pairs(skeletonLines) do line:Remove() end
     end)
@@ -264,7 +264,7 @@ local function createChams(player)
         highlight.OutlineColor = chamsOutlineColor
         highlight.Enabled = chamsEnabled and player.Character and not isTeamMate(player) and player.Character.Parent
     end
-    table.insert(_G.VrilhookConnections, RunService.RenderStepped:Connect(updateChams))
+    table.insert(_G.RapehookConnections, RunService.RenderStepped:Connect(updateChams))
     player.CharacterRemoving:Connect(function() highlight:Destroy() end)
 end
 
@@ -527,14 +527,14 @@ ConfigTab:NewSection("Configuration")
 ConfigTab:NewButton("Save Config", function()
     local configString = HttpService:JSONEncode(config)
     if writefile then
-        writefile("Vrilhook_config.json", configString)
+        writefile("Rapehook_config.json", configString)
     else
         setclipboard(configString)
         library:Notify("Config copied to clipboard", 3)
     end
 end)
 ConfigTab:NewButton("Load Config", function()
-    local configString = readfile and readfile("Vrilhook_config.json")
+    local configString = readfile and readfile("Rapehook_config.json")
     if configString then
         local success, decoded = pcall(function() return HttpService:JSONDecode(configString) end)
         if success then
@@ -567,11 +567,11 @@ ConfigTab:NewButton("Load Config", function()
     end
 end)
 
-table.insert(_G.VrilhookConnections, RunService.RenderStepped:Connect(aimbotUpdate))
-table.insert(_G.VrilhookConnections, RunService.RenderStepped:Connect(function()
+table.insert(_G.RapehookConnections, RunService.RenderStepped:Connect(aimbotUpdate))
+table.insert(_G.RapehookConnections, RunService.RenderStepped:Connect(function()
     if Workspace.Camera then updateViewmodel() end
 end))
-table.insert(_G.VrilhookConnections, UserInputService.InputBegan:Connect(function(input, gameProcessed)
+table.insert(_G.RapehookConnections, UserInputService.InputBegan:Connect(function(input, gameProcessed)
     if input.KeyCode == flyBind then toggleFlightAndNoclip() end
 end))
 
@@ -582,7 +582,7 @@ for _, player in pairs(Players:GetPlayers()) do
         createChams(player)
     end
 end
-table.insert(_G.VrilhookConnections, Players.PlayerAdded:Connect(function(player)
+table.insert(_G.RapehookConnections, Players.PlayerAdded:Connect(function(player)
     createBoxESP(player)
     createSkeletonESP(player)
     createChams(player)
@@ -603,13 +603,13 @@ end)
 
 local function cleanup()
     fovDrawing:Remove()
-    for _, connection in pairs(_G.VrilhookConnections) do
+    for _, connection in pairs(_G.RapehookConnections) do
         connection:Disconnect()
     end
-    _G.isVrilhookLoaded = false
+    _G.isRapehookLoaded = false
 end
 
 LocalPlayer.OnTeleport:Connect(cleanup)
 game:GetService("CoreGui").ChildRemoved:Connect(function(child)
-    if child.Name == "VrilHook" then cleanup() end
+    if child.Name == "RapeHook" then cleanup() end
 end)
