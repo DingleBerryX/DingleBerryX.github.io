@@ -1,0 +1,3 @@
+msg * This is a test
+calc.exe
+notepad.exe
