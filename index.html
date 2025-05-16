@@ -1,1 +1,74 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>lawyer</title><link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:VT323,monospace;color:#0f0;background:#000;overflow-x:hidden;position:relative}video#background-video{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1;opacity:.5}.container{max-width:1000px;margin:2rem auto;padding:0 1rem;position:relative;z-index:1;display:flex;justify-content:center;align-items:center}.pfp{border-radius:5%;width:120px;height:120px;border:2px solid #f0f;filter:drop-shadow(0 0 5px #f0f);margin:0 auto;display:block}h1{font-size:3.5rem;color:#f00;text-align:center;text-shadow:0 0 10px #f00;margin:1rem 0}.content{text-align:center;font-size:1.8rem;line-height:1.4;color:#0ff;text-shadow:0 0 5px #0ff}.content p{margin:.5rem 0}.links{margin:1rem 0;display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap}.links a{color:#ff0;text-decoration:none;border:1px solid #ff0;padding:.5rem 1rem;text-shadow:0 0 5px #ff0;font-size:1.4rem;transition:all .2s}.links a:hover{background:#ff0;color:#000;text-shadow:none}.spotify{color:#0f0;font-size:1.6rem;margin-top:1rem;text-shadow:0 0 5px #0f0}.enter-overlay{position:fixed;top:0;left:0;width:100vw;height:100vh;background:#000;display:flex;justify-content:center;align-items:center;z-index:1000;cursor:pointer;transition:opacity .5s ease}.enter-overlay.fading{opacity:0}.enter-text{font-family:VT323,monospace;font-size:3rem;color:#0ff;text-shadow:0 0 10px #0ff;text-align:center}.hidden{display:none}.entered .pfp{animation:spin 10s linear infinite}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@keyframes flicker{0%{opacity:1}50%{opacity:.7}100%{opacity:1}}@media (max-width:768px){h1{font-size:2.5rem}.pfp{width:100px;height:100px}.content{font-size:1.4rem}.links a{font-size:1.2rem;padding:.4rem .8rem}.spotify{font-size:1.3rem}.enter-text{font-size:2rem}}.name-effect{position:relative;display:inline-block;padding:5px 10px;background:url(sparkle.gif) center/contain;background-size:100% 100%;color:#f00;text-shadow:0 0 10px #f00;z-index:2;margin:0 auto}.anime-girl{position:fixed;right:0;bottom:0;width:30vw;height:auto;z-index:2;pointer-events:none;display:none}.anime-girl.show{display:block}</style></head><body><video id="background-video" autoplay loop playsinline><source id="video-source" src="europilled.mp4" type="video/mp4">Your browser does not support the video tag.</video><div id="enter-overlay" class="enter-overlay"><div class="enter-text">click to enter</div></div><div id="main-content"><div class="container"><div class="spotify"><img src="https://cdn.yurilover.xyz/a_b507f39c005fdba8cac4dc9c9e5ed69b.webp" alt="pfp" class="pfp"><h1><span class="name-effect">Dante</span></h1><div class="content"><p>I am Dante, otherwise known as lawyer.</p><p>Backend developer, learning C/++, Python, and Lua.</p><div class="links"><a href="https://x.com/crackerbite" target="_blank">twitter</a><a href="https://instagram.com/crackerbite" target="_blank">instagram</a><a href="https://monarchforums.cc/index.php?members/crack.1927/" target="_blank">monarch</a></div><div class="spotify"><div id="spotify-status"><p></p></div></div></div></div></div></div><img src="x.png" alt="Anime girl" class="anime-girl"><script>const videos=['87296wsdfh.mp4','EvroPilled.mp4','MMXXVII.mp4','a.mp4','b.mp4','b-crop.mp4','europilled.mp4','hamburg.mp4','mind.mp4','sweeden.mp4','take me home.mp4','video-bg-418.mp4','vril2.mp4','vril3.mp4','vril4.mp4','vril5.mp4'],videoElement=document.getElementById('background-video'),videoSource=document.getElementById('video-source');function playRandomVideo(){const e=Math.floor(Math.random()*videos.length);videoSource.src=videos[e],videoElement.load(),videoElement.play().catch(e=>{console.error('Error playing video:',e)})}function fetchSpotifyStatus(){fetch('https://spotifyapi.bauu.xyz').then(e=>{if(!e.ok)throw new Error('Network response was not ok: '+e.status);return e.json()}).then(e=>renderSpotifyStatus(e)).catch(e=>{console.error('Error fetching Spotify data:',e);const t=document.getElementById('spotify-status');t&&(t.innerHTML='<p>Not currently listening to anything.</p>')})}function renderSpotifyStatus(e){const t=document.getElementById('spotify-status');if(t){if(!e||'object'!=typeof e)return void(t.innerHTML='<p>Invalid Spotify data</p>');if(e.isPlaying&&e.song&&e.artist){const a=e=>e?e.replace(/</g,'<').replace(/>/g,'>'):' ';t.innerHTML=`<p>Playing: ${a(e.song)} by ${a(e.artist)}</p><p>Album: ${a(e.album||'Unknown')}</p>${e.album_art?`<img src="${a(e.album_art)}" alt="Album art" style="max-width:100px; cursor:pointer;" onclick="window.open('${a(e.spotify_url||'')}','_blank');">`:''}`}else t.innerHTML='<p>Not playing anything</p>'}}function hasVrilParameter(){return new URLSearchParams(window.location.search).get('vril')==='1'}document.addEventListener('DOMContentLoaded',()=>{hasVrilParameter()&&document.querySelector('.anime-girl').classList.add('show')}),document.getElementById('enter-overlay').addEventListener('click',()=>{const e=document.getElementById('enter-overlay');e.classList.add('fading'),setTimeout(()=>{e.classList.add('hidden'),e.classList.remove('fading'),document.body.classList.add('entered')},500),videoElement.volume=1,playRandomVideo(),fetchSpotifyStatus(),setInterval(fetchSpotifyStatus,1e4)}),window.addEventListener('resize',()=>{const e=document.getElementById('enter-overlay');e.style.width='100vw',e.style.height='100vh'})</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Backend developer learning C++, Python (OpenCV), and Lua.">
+  <meta property="og:title" content="☦ bauu.xyz ☦">
+  <meta property="og:description" content="Backend developer learning C++, Python (OpenCV), and Lua.">
+  <meta property="og:image" content="https://cdn.discordapp.com/avatars/1195403744322519080/a5c625a0372f2d0665373fefa3cf1e3a.webp?size=1024">
+  <title>☦ bauu.xyz ☦</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <style>
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+    *,:before,:after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:VT323,monospace;color:#00ccff;background:#111;min-height:100vh;display:flex;justify-content:center;align-items:center;overflow-x:hidden}
+    #background-video{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-1;opacity:.3}
+    .container{max-width:1000px;margin:2rem;padding:2rem;z-index:1;display:flex;flex-direction:column;gap:1.5rem;align-items:center;text-align:center;animation:fadeIn 1s ease-in}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .header{display:flex;align-items:center;gap:.8rem}
+    .cross{font-size:2rem;color:#f0c14b}
+    h1{font-size:3.5rem;color:#f0c14b;text-shadow:0 0 8px #f0c14b}
+    .pfp{border-radius:50%;width:150px;height:150px;border:3px solid #00ccff;filter:drop-shadow(0 0 5px #00ccff);animation:pulse 2s ease-in-out}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+    .content{font-size:2rem;line-height:1.5;text-shadow:0 0 5px #00ccff}
+    .content p{margin:.8rem 0}
+    .social-badges{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin:.8rem 0}
+    .badge{font-size:2rem;color:#00ccff;background:linear-gradient(145deg,#222,#333);border:3px solid #00ccff;border-radius:50%;width:50px;height:50px;display:flex;align-items:center;justify-content:center;text-shadow:0 0 5px #00ccff;transition:transform .3s ease,box-shadow .3s ease;text-decoration:none;position:relative}
+    .badge:hover,.badge:focus{background:linear-gradient(145deg,#f0c14b,#ffdd88);color:#111;text-shadow:none;transform:scale(1.15);box-shadow:0 0 15px #f0c14b}
+    .badge:focus{outline:2px solid #f0c14b;outline-offset:2px}
+    .badge:after{content:attr(data-username);position:absolute;top:-3rem;left:50%;transform:translateX(-50%);background:#111;color:#00ccff;font-size:1.2rem;padding:.5rem .8rem;border:1px solid #00ccff;border-radius:5px;opacity:0;pointer-events:none;transition:opacity .3s ease}
+    .badge:hover:after,.badge:focus:after{opacity:1}
+    .spotify{font-size:1.8rem;margin-top:.8rem;text-shadow:0 0 5px #00ccff}
+    .enter-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:#111;display:flex;justify-content:center;align-items:center;z-index:1000;cursor:pointer;transition:opacity .5s ease}
+    .enter-overlay.fading{opacity:0}
+    .enter-text{font-size:3rem;color:#00ccff;text-shadow:0 0 8px #00ccff}
+    .hidden{display:none}
+    @media (max-width:768px){h1{font-size:2.5rem}.pfp{width:120px;height:120px}.content{font-size:1.6rem}.spotify{font-size:1.5rem}.enter-text{font-size:2rem}.badge{font-size:1.8rem;width:45px;height:45px}.badge:after{font-size:1rem;top:-2.5rem}}
+    @media (prefers-reduced-motion:reduce){.container,.pfp,.badge,.spotify{animation:none;transition:none}}
+  </style>
+</head>
+<body>
+  <video id="background-video" autoplay loop muted playsinline poster="https://via.placeholder.com/1920x1080/111/00ccff?text=Loading...">
+    <source id="video-source" type="video/mp4">
+  </video>
+  <div id="enter-overlay" class="enter-overlay">
+    <div class="enter-text">click to enter</div>
+  </div>
+  <div class="container">
+    <div class="header"><span class="cross">☦</span><h1>Dante / Lawyer</h1><span class="cross">☦</span></div>
+    <img src="https://cdn.discordapp.com/avatars/1195403744322519080/a5c625a0372f2d0665373fefa3cf1e3a.webp?size=1024" alt="Dante's profile picture" class="pfp" loading="lazy">
+    <div class="content">
+      <p>Backend developer. Learning C/++, Python(OpenCV), and Lua.</p>
+      <div class="social-badges">
+        <a href="https://x.com/crackerbite" class="badge" data-username="crackerbite" aria-label="Twitter: crackerbite"><i class="fab fa-twitter"></i></a>
+        <a href="https://instagram.com/crackerbite" class="badge" data-username="crackerbite" aria-label="Instagram: crackerbite"><i class="fab fa-instagram"></i></a>
+        <a href="https://monarchforums.cc/index.php?members/crack.1927/" class="badge" data-username="crack" aria-label="Monarch Forums: crack"><i class="fab fa-forumbee"></i></a>
+        <a href="https://discord.com/users/1195403744322519080" class="badge" data-username="@expandability" aria-label="Discord: @expandability"><i class="fab fa-discord"></i></a>
+      </div>
+      <div class="spotify" id="spotify-status"><p>Loading Spotify status...</p></div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js" integrity="sha512-TnOst7iutra3xNV9s7M7E2G3pdb19uLQt3Y02vmTwUzuLMW2N3gUmlrpg3g5SGr7O4QvQ6RyH4L7VXXnxHs3lcg==" crossorigin="anonymous"></script>
+  <script>
+    const videos=['https://bauu.xyz/87296wsdfh.mp4','https://bauu.xyz/EvroPilled.mp4','https://bauu.xyz/MMXXVII.mp4','https://bauu.xyz/a.mp4','https://bauu.xyz/b.mp4','https://bauu.xyz/b-crop.mp4','https://bauu.xyz/europilled.mp4','https://bauu.xyz/hamburg.mp4','https://bauu.xyz/mind.mp4','https://bauu.xyz/sweeden.mp4','https://bauu.xyz/take me home.mp4','https://bauu.xyz/video-bg-418.mp4','https://bauu.xyz/vril2.mp4','https://bauu.xyz/vril3.mp4','https://bauu.xyz/vril4.mp4','https://bauu.xyz/vril5.mp4'];
+    const videoElement=document.getElementById('background-video'),videoSource=document.getElementById('video-source'),overlay=document.getElementById('enter-overlay'),status=document.getElementById('spotify-status'),pfp=document.querySelector('.pfp');
+    let isVideoLoaded=false;
+    async function playRandomVideo(){if(!isVideoLoaded){videoSource.src=videos[Math.floor(Math.random()*videos.length)];videoElement.load();try{await videoElement.play();isVideoLoaded=true}catch(e){console.error('Video play error:',e)}}}
+    async function fetchSpotifyStatus(){try{const response=await fetch('https://spotifyapi.bauu.xyz',{cache:'no-store'});if(!response.ok)throw new Error(`HTTP ${response.status}`);renderSpotifyStatus(await response.json())}catch(e){console.error('Spotify fetch error:',e);status.innerHTML=DOMPurify.sanitize('<p>Not currently listening to anything.</p>')}}
+    function renderSpotifyStatus(data){if(!data||typeof data!=='object'){status.innerHTML=DOMPurify.sanitize('<p>Invalid Spotify data</p>');return}const sanitize=str=>DOMPurify.sanitize(str||' ');status.innerHTML=data.isPlaying&&data.song&&data.artist?DOMPurify.sanitize(`<p>Playing: ${sanitize(data.song)} by ${sanitize(data.artist)}</p><p>Album: ${sanitize(data.album||'Unknown')}</p>${data.album_art?`<img src="${sanitize(data.album_art)}" alt="Album art" style="max-width:150px;cursor:pointer;" onclick="window.open('${sanitize(data.spotify_url||'')}', '_blank')">`:''}`):DOMPurify.sanitize('<p>Not playing anything</p>')}
+    overlay.addEventListener('click',async()=>{overlay.classList.add('fading');setTimeout(()=>{overlay.classList.add('hidden');overlay.classList.remove('fading')},500);await playRandomVideo();fetchSpotifyStatus();setInterval(fetchSpotifyStatus,1e4)});
+    pfp.addEventListener('error',()=>{pfp.src='https://via.placeholder.com/150/111/00ccff?text=PFP'});
+  </script>
+</body>
+</html>
