@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSX Library Documentation</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #1a1a1a;
+            color: #d4d4d4;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 1px solid #2a2a2a;
+            margin-bottom: 40px;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+        header p {
+            color: #8a8a8a;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        nav {
+            margin-bottom: 40px;
+            padding: 15px 0;
+            border-bottom: 1px solid #2a2a2a;
+            position: sticky;
+            top: 0;
+            background-color: #1a1a1a;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        nav a {
+            text-decoration: none;
+            color: #60a5fa;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+        nav a:hover {
+            color: #93c5fd;
+        }
+        section {
+            margin-bottom: 40px;
+        }
+        section h2 {
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #60a5fa;
+            padding-bottom: 8px;
+        }
+        section h3 {
+            font-size: 1.3rem;
+            color: #e5e5e5;
+            margin: 25px 0 12px;
+        }
+        section h4 {
+            font-size: 1.1rem;
+            color: #60a5fa;
+            margin: 15px 0 8px;
+        }
+        p {
+            color: #c0c0c0;
+            margin-bottom: 15px;
+        }
+        pre {
+            background-color: #1e1e1e;
+            border-radius: 6px;
+            padding: 20px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            position: relative;
+            border: 1px solid #2a2a2a;
+        }
+        code {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: #e0e0e0;
+        }
+        .language-lua .keyword { color: #ff79c6; }
+        .language-lua .string { color: #f1fa8c; }
+        .language-lua .number { color: #bd93f9; }
+        .language-lua .function { color: #8be9fd; }
+        .language-lua .comment { color: #6272a4; }
+        .method, .component {
+            margin-bottom: 30px;
+            padding-left: 15px;
+            border-left: 3px solid #60a5fa;
+        }
+        .method ul, .component ul {
+            padding-left: 20px;
+            color: #c0c0c0;
+        }
+        .method li, .component li {
+            margin-bottom: 10px;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .copy-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #60a5fa;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background-color 0.2s;
+        }
+        .copy-button:hover {
+            background-color: #93c5fd;
+        }
+        .copy-button.copied {
+            background-color: #34d399;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #2a2a2a;
+            padding: 8px;
+            text-align: left;
+            color: #c0c0c0;
+        }
+        th {
+            background-color: #2a2a2a;
+            color: #e5e5e5;
+        }
+        details {
+            margin-bottom: 20px;
+        }
+        summary {
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: #60a5fa;
+            padding: 8px 0;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 12px;
+                align-items: center;
+            }
+            section {
+                margin-bottom: 40px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-base.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="fade-in">
+            <h1>XSX Library</h1>
+            <p>A modern UI framework for Roblox cheats, offering dynamic components, smooth animations, and extensive customization for immersive interfaces.</p>
+        </header>
+
+        <nav aria-label="Main navigation" class="fade-in">
+            <ul>
+                <li><a href="#introduction" tabindex="0" aria-label="Introduction section">Introduction</a></li>
+                <li><a href="#setup" tabindex="0" aria-label="Setup section">Setup</a></li>
+                <li><a href="#configuration" tabindex="0" aria-label="Configuration section">Configuration</a></li>
+                <li><a href="#core-methods" tabindex="0" aria-label="Core Methods section">Core Methods</a></li>
+                <li><a href="#components" tabindex="0" aria-label="Components section">Components</a></li>
+                <li><a href="#visual-effects" tabindex="0" aria-label="Visual Effects section">Visual Effects</a></li>
+                <li><a href="#examples" tabindex="0" aria-label="Examples section">Examples</a></li>
+                <li><a href="#troubleshooting" tabindex="0" aria-label="Troubleshooting section">Troubleshooting</a></li>
+                <li><a href="#changelog" tabindex="0" aria-label="Changelog section">Changelog</a></li>
+            </ul>
+        </nav>
+
+        <section id="introduction" class="fade-in">
+            <h2>Introduction</h2>
+            <p>The XSX Library is a feature-rich UI framework designed for Roblox cheat developers. It provides tools to create polished, interactive user interfaces with minimal effort. Key features include:</p>
+            <ul>
+                <li>Draggable windows with smooth animations</li>
+                <li>Rainbow gradient effects for vibrant visuals</li>
+                <li>Customizable notifications and watermarks</li>
+                <li>Dynamic components like toggles, sliders, and dropdowns</li>
+                <li>Optimized for modern Roblox versions with bug fixes</li>
+            </ul>
+            <h3>Quick Start</h3>
+            <p>Get started with XSX in just a few lines:</p>
+            <pre><code class="language-lua">local XSX = loadstring(game:HttpGet('https://bauu.xyz/xsx.lua'))()
+local Library = XSX:Init({title = "MyCheat", Key = Enum.KeyCode.Insert})
+local Tab = Library:NewTab("Main")
+Tab:NewButton("Test", function() print("Clicked!") end)
+</code><button class="copy-button">Copy</button></pre>
+        </section>
+
+        <section id="setup" class="fade-in">
+            <h2>Setup</h2>
+            <p>Integrate XSX by including the library in your client-side script, typically via a ModuleScript.</p>
+            <pre><code class="language-lua">local XSX = loadstring(game:HttpGet('https://bauu.xyz/xsx.lua'))()
+local Library = XSX:Init({
+    title = "ExampleHook",
+    company = "ExampleStudio",
+    Key = Enum.KeyCode.Insert,
+    RainbowEnabled = true,
+    BlurEffect = true,
+    Debug = false
+})
+</code><button class="copy-button">Copy</button></pre>
+            <p>After initialization, create tabs, components, and visual effects. The library handles UI toggling via the specified keybind.</p>
+        </section>
+
+        <section id="configuration" class="fade-in">
+            <h2>Configuration</h2>
+            <p>Customize XSX's appearance and behavior through the <code>:Init()</code> configuration table.</p>
+            <pre><code class="language-lua">local Config = {
+    title = "ExampleHook",
+    company = "ExampleStudio",
+    Key = Enum.KeyCode.Insert,
+    RainbowEnabled = true,
+    BlurEffect = true,
+    BlurSize = 24,
+    FieldOfView = 70,
+    transparency = 0,
+    backgroundColor = Color3.fromRGB(31, 31, 31),
+    headerColor = Color3.fromRGB(255, 255, 255),
+    companyColor = Color3.fromRGB(163, 151, 255),
+    acientColor = Color3.fromRGB(167, 154, 121),
+    darkGray = Color3.fromRGB(27, 27, 27),
+    lightGray = Color3.fromRGB(48, 48, 48),
+    Font = Enum.Font.Code,
+    Debug = true,
+    rainbowColors = ColorSequence.new{
+        ColorSequenceKeypoint.new(0.00, Color3.fromRGB(241, 137, 53)),
+        ColorSequenceKeypoint.new(0.33, Color3.fromRGB(241, 53, 106)),
+        ColorSequenceKeypoint.new(0.66, Color3.fromRGB(133, 53, 241)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(53, 186, 241))
+    }
+}
+Library:Init(Config)
+</code><button class="copy-button">Copy</button></pre>
+            <p>Adjust these options to match your cheat's theme for a cohesive look.</p>
+        </section>
+
+        <section id="core-methods" class="fade-in">
+            <h2>Core Methods</h2>
+            <details class="method">
+                <summary><h4>:Init(config)</h4></summary>
+                <p>Initializes the library with the provided configuration.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>config</td><td>table</td><td>Configuration options</td></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">Library instance</td></tr>
+                </table>
+            </details>
+            <details class="method">
+                <summary><h4>:Watermark(text)</h4></summary>
+                <p>Displays a bottom-screen watermark with animated fade-in and rainbow bar.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>text</td><td>string</td><td>Watermark text</td></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">WatermarkFunctions (<code>Hide()</code>, <code>Show()</code>, <code>SetText(new)</code>, <code>Remove()</code>)</td></tr>
+                </table>
+            </details>
+            <details class="method">
+                <summary><h4>:Notify(text, duration, type, callback)</h4></summary>
+                <p>Shows a notification with customizable type, duration, and callback.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>text</td><td>string</td><td>Notification message</td></tr>
+                    <tr><td>duration</td><td>number</td><td>Display time in seconds (default: 5)</td></tr>
+                    <tr><td>type</td><td>string</td><td>"notification", "alert", "error", "success"</td></tr>
+                    <tr><td>callback</td><td>function</td><td>Optional callback on completion</td></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">NotificationFunctions (<code>SetText(new)</code>)</td></tr>
+                </table>
+            </details>
+            <details class="method">
+                <summary><h4>:NewTab(title)</h4></summary>
+                <p>Creates a new tab in the main UI window.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>title</td><td>string</td><td>Tab name</td></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">TabFunctions</td></tr>
+                </table>
+            </details>
+            <details class="method">
+                <summary><h4>:BeginIntroduction()</h4></summary>
+                <p>Initiates an animated introduction sequence displaying the company logo.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">self</td></tr>
+                </table>
+            </details>
+            <details class="method">
+                <summary><h4>:AddIntroductionMessage(message)</h4></summary>
+                <p>Adds a message to the introduction sequence with a fade-in effect.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>message</td><td>string</td><td>Message text</td></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">TextLabel instance</td></tr>
+                </table>
+            </details>
+            <details class="method">
+                <summary><h4>:EndIntroduction()</h4></summary>
+                <p>Concludes the introduction sequence with a fade-out animation.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">self</td></tr>
+                </table>
+            </details>
+            <details class="method">
+                <summary><h4>:Panic()</h4></summary>
+                <p>Resets all toggles and sliders to their default states.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">self</td></tr>
+                </table>
+            </details>
+            <details class="method">
+                <summary><h4>:SetKeybind(key)</h4></summary>
+                <p>Changes the keybind used to toggle the UI.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>key</td><td>Enum.KeyCode</td><td>New keybind</td></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">self</td></tr>
+                </table>
+            </details>
+            <details class="method">
+                <summary><h4>:ShowUI(visible)</h4></summary>
+                <p>Toggles the UI's visibility with blur and FOV effects.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>visible</td><td>boolean</td><td>Show or hide UI</td></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">self</td></tr>
+                </table>
+            </details>
+            <details class="method">
+                <summary><h4>:Remove()</h4></summary>
+                <p>Destroys the UI and triggers <code>:Panic()</code>.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">self</td></tr>
+                </table>
+            </details>
+            <details class="method">
+                <summary><h4>:GetUsername(), :GetUserId(), :GetPlaceId(), :GetJobId()</h4></summary>
+                <p>Utility methods to retrieve player and game information.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">string or number</td></tr>
+                </table>
+            </details>
+            <details class="method">
+                <summary><h4>:Rejoin()</h4></summary>
+                <p>Rejoins the current game instance.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">none</td></tr>
+                </table>
+            </details>
+            <details class="method">
+                <summary><h4>:Copy(input)</h4></summary>
+                <p>Copies text to the clipboard using Roblox clipboard functions.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>input</td><td>string</td><td>Text to copy</td></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">none</td></tr>
+                </table>
+            </details>
+            <details class="method">
+                <summary><h4>:UnlockFps(new)</h4></summary>
+                <p>Sets the FPS cap if supported by the Roblox environment.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>new</td><td>number</td><td>New FPS cap</td></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">none</td></tr>
+                </table>
+            </details>
+        </section>
+
+        <section id="components" class="fade-in">
+            <h2>Components</h2>
+            <p>Components are created within tabs using <code>:NewTab()</code>. Each component returns a table of functions for manipulation.</p>
+            <details class="component">
+                <summary><h3>NewLabel(text, alignment)</h3></summary>
+                <p>Creates a static text label with customizable alignment.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>text</td><td>string</td><td>Label text</td></tr>
+                    <tr><td>alignment</td><td>string</td><td>"left", "center", "right" (default: "left")</td></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">LabelFunctions (<code>SetText(text)</code>, <code>Remove()</code>, <code>Hide()</code>, <code>Show()</code>, <code>Align(new)</code>)</td></tr>
+                </table>
+            </details>
+            <details class="component">
+                <summary><h3>NewButton(text, callback)</h3></summary>
+                <p>Creates a clickable button with hover and click animations.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>text</td><td>string</td><td>Button text</td></tr>
+                    <tr><td>callback</td><td>function</td><td>Function called on click</td></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">ButtonFunctions (<code>Fire()</code>, <code>Hide()</code>, <code>Show()</code>, <code>SetText(text)</code>, <code>Remove()</code>, <code>SetFunction(new)</code>)</td></tr>
+                </table>
+            </details>
+            <details class="component">
+                <summary><h3>NewSection(text)</h3></summary>
+                <p>Creates a section header for organizing components.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>text</td><td>string</td><td>Section title</td></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">SectionFunctions (<code>SetText(new)</code>, <code>Hide()</code>, <code>Show()</code>, <code>Remove()</code>)</td></tr>
+                </table>
+            </details>
+            <details class="component">
+                <summary><h3>NewToggle(text, default, callback)</h3></summary>
+                <p>Creates a toggle switch with an optional keybind.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>text</td><td>string</td><td>Toggle label</td></tr>
+                    <tr><td>default</td><td>boolean</td><td>Initial state (default: false)</td></tr>
+                    <tr><td>callback</td><td>function</td><td>Called with boolean state</td></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">ToggleFunctions (<code>Toggle()</code>, <code>Remove()</code>, <code>Set(state)</code>, <code>GetValue()</code>, <code>SetFunction(new)</code>, <code>AddKeybind(default)</code>)</td></tr>
+                </table>
+            </details>
+            <details class="component">
+                <summary><h3>NewKeybind(text, default, callback)</h3></summary>
+                <p>Creates a keybind input for binding keys to actions.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>text</td><td>string</td><td>Keybind label</td></tr>
+                    <tr><td>default</td><td>Enum.KeyCode</td><td>Default key (default: Enum.KeyCode.P)</td></tr>
+                    <tr><td>callback</td><td>function</td><td>Called with key name</td></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">KeybindFunctions (<code>Fire()</code>, <code>SetFunction(new)</code>, <code>SetKey(new)</code>, <code>SetText(new)</code>, <code>Hide()</code>, <code>Show()</code>)</td></tr>
+                </table>
+            </details>
+            <details class="component">
+                <summary><h3>NewTextbox(text, default, placeHolder, type, autoexec, autoclear, callback)</h3></summary>
+                <p>Creates a text input field with customizable size and behavior.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>text</td><td>string</td><td>Textbox label</td></tr>
+                    <tr><td>default</td><td>string</td><td>Default text</td></tr>
+                    <tr><td>placeHolder</td><td>string</td><td>Placeholder text</td></tr>
+                    <tr><td>type</td><td>string</td><td>"small", "medium", "large" (default: "small")</td></tr>
+                    <tr><td>autoexec</td><td>boolean</td><td>Execute on input change (default: true)</td></tr>
+                    <tr><td>autoclear</td><td>boolean</td><td>Clear on execution (default: false)</td></tr>
+                    <tr><td>callback</td><td>function</td><td>Called with input text</td></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">TextboxFunctions (<code>Input(new)</code>, <code>Fire()</code>, <code>SetFunction(new)</code>, <code>SetText(new)</code>, <code>Hide()</code>, <code>Show()</code>, <code>Remove()</code>, <code>SetPlaceHolder(new)</code>)</td></tr>
+                </table>
+            </details>
+            <details class="component">
+                <summary><h3>NewSelector(text, default, list, callback)</h3></summary>
+                <p>Creates a dropdown menu for selecting options.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>text</td><td>string</td><td>Selector label</td></tr>
+                    <tr><td>default</td><td>string</td><td>Default selected option</td></tr>
+                    <tr><td>list</td><td>table</td><td>Array of option strings</td></tr>
+                    <tr><td>callback</td><td>function</td><td>Called with selected option</td></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">SelectorFunctions (<code>AddOption(new, callback)</code>, <code>RemoveOption(option)</code>, <code>SetFunction(new)</code>, <code>Text(new)</code>, <code>Hide()</code>, <code>Show()</code>, <code>Remove()</code>)</td></tr>
+                </table>
+            </details>
+            <details class="component">
+                <summary><h3>NewSlider(text, suffix, compare, compareSign, values, callback)</h3></summary>
+                <p>Creates a slider for numerical input with a draggable indicator.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>text</td><td>string</td><td>Slider label</td></tr>
+                    <tr><td>suffix</td><td>string</td><td>Text appended to value</td></tr>
+                    <tr><td>compare</td><td>boolean</td><td>Display max value (default: false)</td></tr>
+                    <tr><td>compareSign</td><td>string</td><td>Separator for comparison (default: "/")</td></tr>
+                    <tr><td>values</td><td>table</td><td>{min, max, default}</td></tr>
+                    <tr><td>callback</td><td>function</td><td>Called with current value</td></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">SliderFunctions (<code>Set(new, noCallback)</code>, <code>Max(new)</code>, <code>Min(new)</code>, <code>SetFunction(new)</code>, <code>GetValue()</code>, <code>SetText(new)</code>, <code>Hide()</code>, <code>Show()</code>, <code>Remove()</code>)</td></tr>
+                </table>
+            </details>
+            <details class="component">
+                <summary><h3>NewSeperator()</h3></summary>
+                <p>Creates a horizontal separator for visual organization.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">SeperatorFunctions (<code>Hide()</code>, <code>Show()</code>, <code>Remove()</code>)</td></tr>
+                </table>
+            </details>
+        </section>
+
+        <section id="visual-effects" class="fade-in">
+            <h2>Visual Effects</h2>
+            <details class="method">
+                <summary><h4>:ApplyRainbow(instance, wave)</h4></summary>
+                <p>Applies a rainbow gradient effect to a UI element.</p>
+                <table>
+                    <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>instance</td><td>Instance</td><td>UI element to apply effect</td></tr>
+                    <tr><td>wave</td><td>boolean</td><td>Use animated gradient wave (default: false)</td></tr>
+                    <tr><td><strong>Returns</strong></td><td colspan="2">none</td></tr>
+                </table>
+                <p>Enable <code>RainbowEnabled</code> in the config to apply this effect to supported components.</p>
+            </details>
+            <details class="method">
+                <summary><h4>Blur Effect</h4></summary>
+                <p>When <code>BlurEffect = true</code>, the UI applies a camera blur when opened, controlled by <code>BlurSize</code> and <code>FieldOfView</code>.</p>
+            </details>
+            <details class="method">
+                <summary><h4>TweenWrapper</h4></summary>
+                <p>Manages animations with predefined styles.</p>
+                <pre><code class="language-lua">TweenWrapper:CreateStyle("custom", 0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut)
+</code><button class="copy-button">Copy</button></pre>
+                <p>Custom styles can be created for unique animations.</p>
+            </details>
+        </section>
+
+        <section id="examples" class="fade-in">
+            <h2>Examples</h2>
+            <h3>Full UI Implementation</h3>
+            <p>Demonstrates a complete UI setup with introduction, watermark, notification, and components.</p>
+            <pre><code class="language-lua">local XSX = loadstring(game:HttpGet('https://bauu.xyz/xsx.lua'))()
+local Library = XSX:Init({
+    title = "ExampleHook - Advanced",
+    company = "ExampleStudio",
+    Key = Enum.KeyCode.Insert,
+    RainbowEnabled = true,
+    BlurEffect = true,
+    Debug = false
+})
+
+Library:BeginIntroduction()
+Library:AddIntroductionMessage("Welcome to ExampleHook!")
+Library:AddIntroductionMessage("Press Insert to toggle the interface.")
+Library:AddIntroductionMessage("")
+wait(2)
+Library:EndIntroduction()
+
+Library:Watermark("ExampleHook v1.0 | FPS: " .. Library.fps)
+
+Library:Notify("UI Initialized Successfully!", 5, "success", function()
+    print("notification triggered, you could do something else here, like auto load configs!")
+end)
+
+local MainTab = Library:NewTab("Main")
+MainTab:NewSection("Player Controls")
+MainTab:NewLabel("Adjust your character settings below", "center")
+MainTab:NewButton("Reset Character", function()
+    game.Players.LocalPlayer.Character:BreakJoints()
+    Library:Notify("Character reset!", 3, "alert")
+end)
+MainTab:NewToggle("Infinite Jump", false, function(state)
+    print("Infinite Jump: " .. tostring(state))
+end):AddKeybind(Enum.KeyCode.J)
+MainTab:NewSlider("Walk Speed", " studs/s", true, "/", {
+    min = 16,
+    max = 100,
+    default = 16
+}, function(value)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
+end)
+MainTab:NewSelector("Team", "Neutral", {"Red", "Blue", "Neutral"}, function(team)
+    print("Selected team: " .. team)
+end)
+MainTab:NewTextbox("Chat Message", "", "Enter message...", "medium", true, false, function(text)
+    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(text, "All")
+end)
+MainTab:NewSeperator()
+
+local SettingsTab = Library:NewTab("Settings")
+SettingsTab:NewSection("Game Settings")
+SettingsTab:NewKeybind("UI Bind", Enum.KeyCode.Insert, function(key)
+    Library:ShowUI(not Library.background.Visible)
+end)
+</code><button class="copy-button">Copy</button></pre>
+            <h3>Dynamic Watermark Update</h3>
+            <p>Updates the watermark text dynamically to display FPS.</p>
+            <pre><code class="language-lua">local Watermark = Library:Watermark("Loading...")
+game:GetService("RunService").RenderStepped:Connect(function()
+    Watermark:SetText("Example UI v1.0.0 | FPS: " .. Library.fps)
+end)
+</code><button class="copy-button">Copy</button></pre>
+        </section>
+
+        <section id="troubleshooting" class="fade-in">
+            <h2>Troubleshooting</h2>
+            <p>Common issues and solutions when using XSX.</p>
+            <ul>
+                <li><strong>UI not toggling</strong>: Ensure the keybind is not conflicting with other scripts. Use <code>:SetKeybind(new)</code> to change it.</li>
+                <li><strong>Blur effect not working</strong>: Check if <code>BlurEffect</code> is enabled and <code>BlurSize</code> is set appropriately.</li>
+                <li><strong>Script errors</strong>: Enable <code>Debug = true</code> in the config to log detailed errors to the console.</li>
+            </ul>
+        </section>
+
+        <section id="changelog" class="fade-in">
+            <h2>Changelog</h2>
+            <h3>v1.0.0 - June 2025</h3>
+            <ul>
+                <li>Initial release with core UI components and rainbow effects.</li>
+                <li>Added blur and FOV customization.</li>
+            </ul>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-lua.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            elements.forEach(element => observer.observe(element));
+            document.querySelectorAll('.copy-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const code = button.previousElementSibling.querySelector('code').textContent;
+                    navigator.clipboard.writeText(code).then(() => {
+                        button.classList.add('copied');
+                        button.textContent = 'Copied!';
+                        setTimeout(() => {
+                            button.classList.remove('copied');
+                            button.textContent = 'Copy';
+                        }, 2000);
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

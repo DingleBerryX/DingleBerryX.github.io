@@ -1,5 +1,8 @@
 --[[
-  xsx ui lib fixed by lawyer
+
+ > old UI library for S^X fixed for newer roblox versions and bugfixes
+ > @expansionary on discord
+
 ]]
 
 local CloneRef = cloneref or function(a)return a end
