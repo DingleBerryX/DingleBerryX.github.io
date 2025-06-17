@@ -130,25 +130,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-        .copy-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #60a5fa;
-            color: #ffffff;
-            border: none;
-            border-radius: 4px;
-            padding: 6px 12px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: background-color 0.2s;
-        }
-        .copy-button:hover {
-            background-color: #93c5fd;
-        }
-        .copy-button.copied {
-            background-color: #34d399;
-        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -229,7 +210,7 @@
 local Library = XSX:Init({title = "MyCheat", Key = Enum.KeyCode.Insert})
 local Tab = Library:NewTab("Main")
 Tab:NewButton("Test", function() print("Clicked!") end)
-</code><button class="copy-button">Copy</button></pre>
+</code></pre>
         </section>
 
         <section id="setup" class="fade-in">
@@ -244,7 +225,7 @@ local Library = XSX:Init({
     BlurEffect = true,
     Debug = false
 })
-</code><button class="copy-button">Copy</button></pre>
+</code></pre>
             <p>After initialization, create tabs, components, and visual effects. The library handles UI toggling via the specified keybind.</p>
         </section>
 
@@ -276,7 +257,7 @@ local Library = XSX:Init({
     }
 }
 Library:Init(Config)
-</code><button class="copy-button">Copy</button></pre>
+</code></pre>
             <p>Adjust these options to match your cheat's theme for a cohesive look.</p>
         </section>
 
@@ -542,7 +523,7 @@ Library:Init(Config)
                 <summary><h4>TweenWrapper</h4></summary>
                 <p>Manages animations with predefined styles.</p>
                 <pre><code class="language-lua">TweenWrapper:CreateStyle("custom", 0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut)
-</code><button class="copy-button">Copy</button></pre>
+</code></pre>
                 <p>Custom styles can be created for unique animations.</p>
             </details>
         </section>
@@ -604,14 +585,14 @@ SettingsTab:NewSection("Game Settings")
 SettingsTab:NewKeybind("UI Bind", Enum.KeyCode.Insert, function(key)
     Library:ShowUI(not Library.background.Visible)
 end)
-</code><button class="copy-button">Copy</button></pre>
+</code></pre>
             <h3>Dynamic Watermark Update</h3>
             <p>Updates the watermark text dynamically to display FPS.</p>
             <pre><code class="language-lua">local Watermark = Library:Watermark("Loading...")
 game:GetService("RunService").RenderStepped:Connect(function()
     Watermark:SetText("Example UI v1.0.0 | FPS: " .. Library.fps)
 end)
-</code><button class="copy-button">Copy</button></pre>
+</code></pre>
         </section>
 
         <section id="troubleshooting" class="fade-in">
@@ -638,19 +619,6 @@ end)
                 });
             }, { threshold: 0.1 });
             elements.forEach(element => observer.observe(element));
-            document.querySelectorAll('.copy-button').forEach(button => {
-                button.addEventListener('click', () => {
-                    const code = button.previousElementSibling.querySelector('code').textContent;
-                    navigator.clipboard.writeText(code).then(() => {
-                        button.classList.add('copied');
-                        button.textContent = 'Copied!';
-                        setTimeout(() => {
-                            button.classList.remove('copied');
-                            button.textContent = 'Copy';
-                        }, 2000);
-                    });
-                });
-            });
         });
     </script>
 </body>
