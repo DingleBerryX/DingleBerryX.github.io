@@ -48,6 +48,10 @@
             background-color: #1a1a1a;
             z-index: 100;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+        nav.hidden {
+            transform: translateY(-100%);
         }
         nav ul {
             list-style: none;
@@ -154,6 +158,9 @@
             color: #60a5fa;
             padding: 8px 0;
         }
+        .mobile-only, .desktop-only {
+            display: none;
+        }
         @media (max-width: 768px) {
             .container {
                 padding: 20px 15px;
@@ -169,6 +176,18 @@
             section {
                 margin-bottom: 40px;
             }
+            .mobile-only {
+                display: block;
+            }
+            .desktop-only {
+                display: none;
+            }
+            nav {
+                transform: translateY(0);
+            }
+            nav.hidden {
+                transform: translateY(-100%);
+            }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -178,7 +197,8 @@
     <div class="container">
         <header class="fade-in">
             <h1>XSX Library</h1>
-            <p>A modern UI framework for Roblox cheats, offering dynamic components, smooth animations, and extensive customization for immersive interfaces.</p>
+            <p class="desktop-only">A modern UI framework for Roblox cheats, offering dynamic components, smooth animations, and extensive customization for immersive interfaces.</p>
+            <p class="mobile-only">A UI framework for Roblox cheats with dynamic components and animations.</p>
         </header>
 
         <nav aria-label="Main navigation" class="fade-in">
@@ -188,21 +208,22 @@
                 <li><a href="#configuration" tabindex="0" aria-label="Configuration section">Configuration</a></li>
                 <li><a href="#core-methods" tabindex="0" aria-label="Core Methods section">Core Methods</a></li>
                 <li><a href="#components" tabindex="0" aria-label="Components section">Components</a></li>
-                <li><a href="#visual-effects" tabindex="0" aria-label="Visual Effects section">Visual Effects</a></li>
-                <li><a href="#examples" tabindex="0" aria-label="Examples section">Examples</a></li>
-                <li><a href="#troubleshooting" tabindex="0" aria-label="Troubleshooting section">Troubleshooting</a></li>
+                <li class="desktop-only"><a href="#visual-effects" tabindex="0" aria-label="Visual Effects section">Visual Effects</a></li>
+                <li class="desktop-only"><a href="#examples" tabindex="0" aria-label="Examples section">Examples</a></li>
+                <li class="desktop-only"><a href="#troubleshooting" tabindex="0" aria-label="Troubleshooting section">Troubleshooting</a></li>
             </ul>
         </nav>
 
         <section id="introduction" class="fade-in">
             <h2>Introduction</h2>
-            <p>The XSX Library is a feature-rich UI framework designed for Roblox cheat developers. It provides tools to create polished, interactive user interfaces with minimal effort. Key features include:</p>
+            <p class="desktop-only">The XSX Library is a feature-rich UI framework designed for Roblox cheat developers. It provides tools to create polished, interactive user interfaces with minimal effort. Key features include:</p>
+            <p class="mobile-only">XSX Library is a UI framework for Roblox cheats, offering tools for interactive interfaces. Key features:</p>
             <ul>
                 <li>Draggable windows with smooth animations</li>
                 <li>Rainbow gradient effects for vibrant visuals</li>
-                <li>Customizable notifications and watermarks</li>
+                <li class="desktop-only">Customizable notifications and watermarks</li>
                 <li>Dynamic components like toggles, sliders, and dropdowns</li>
-                <li>Optimized for modern Roblox versions with bug fixes</li>
+                <li class="desktop-only">Optimized for modern Roblox versions with bug fixes</li>
             </ul>
             <h3>Quick Start</h3>
             <p>Get started with XSX in just a few lines:</p>
@@ -281,7 +302,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">WatermarkFunctions (<code>Hide()</code>, <code>Show()</code>, <code>SetText(new)</code>, <code>Remove()</code>)</td></tr>
                 </table>
             </details>
-            <details class="method">
+            <details class="method desktop-only">
                 <summary><h4>:Notify(text, duration, type, callback)</h4></summary>
                 <p>Shows a notification with customizable type, duration, and callback.</p>
                 <table>
@@ -293,7 +314,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">NotificationFunctions (<code>SetText(new)</code>)</td></tr>
                 </table>
             </details>
-            <details class="method">
+            <details class="method desktop-only">
                 <summary><h4>:NewTab(title)</h4></summary>
                 <p>Creates a new tab in the main UI window.</p>
                 <table>
@@ -302,7 +323,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">TabFunctions</td></tr>
                 </table>
             </details>
-            <details class="method">
+            <details class="method desktop-only">
                 <summary><h4>:BeginIntroduction()</h4></summary>
                 <p>Initiates an animated introduction sequence displaying the company logo.</p>
                 <table>
@@ -310,7 +331,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">self</td></tr>
                 </table>
             </details>
-            <details class="method">
+            <details class="method desktop-only">
                 <summary><h4>:AddIntroductionMessage(message)</h4></summary>
                 <p>Adds a message to the introduction sequence with a fade-in effect.</p>
                 <table>
@@ -319,7 +340,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">TextLabel instance</td></tr>
                 </table>
             </details>
-            <details class="method">
+            <details class="method desktop-only">
                 <summary><h4>:EndIntroduction()</h4></summary>
                 <p>Concludes the introduction sequence with a fade-out animation.</p>
                 <table>
@@ -327,7 +348,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">self</td></tr>
                 </table>
             </details>
-            <details class="method">
+            <details class="method desktop-only">
                 <summary><h4>:Panic()</h4></summary>
                 <p>Resets all toggles and sliders to their default states.</p>
                 <table>
@@ -335,7 +356,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">self</td></tr>
                 </table>
             </details>
-            <details class="method">
+            <details class="method desktop-only">
                 <summary><h4>:SetKeybind(key)</h4></summary>
                 <p>Changes the keybind used to toggle the UI.</p>
                 <table>
@@ -344,7 +365,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">self</td></tr>
                 </table>
             </details>
-            <details class="method">
+            <details class="method desktop-only">
                 <summary><h4>:ShowUI(visible)</h4></summary>
                 <p>Toggles the UI's visibility with blur and FOV effects.</p>
                 <table>
@@ -353,7 +374,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">self</td></tr>
                 </table>
             </details>
-            <details class="method">
+            <details class="method desktop-only">
                 <summary><h4>:Remove()</h4></summary>
                 <p>Destroys the UI and triggers <code>:Panic()</code>.</p>
                 <table>
@@ -361,7 +382,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">self</td></tr>
                 </table>
             </details>
-            <details class="method">
+            <details class="method desktop-only">
                 <summary><h4>:GetUsername(), :GetUserId(), :GetPlaceId(), :GetJobId()</h4></summary>
                 <p>Utility methods to retrieve player and game information.</p>
                 <table>
@@ -369,7 +390,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">string or number</td></tr>
                 </table>
             </details>
-            <details class="method">
+            <details class="method desktop-only">
                 <summary><h4>:Rejoin()</h4></summary>
                 <p>Rejoins the current game instance.</p>
                 <table>
@@ -377,7 +398,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">none</td></tr>
                 </table>
             </details>
-            <details class="method">
+            <details class="method desktop-only">
                 <summary><h4>:Copy(input)</h4></summary>
                 <p>Copies text to the clipboard using Roblox clipboard functions.</p>
                 <table>
@@ -386,7 +407,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">none</td></tr>
                 </table>
             </details>
-            <details class="method">
+            <details class="method desktop-only">
                 <summary><h4>:UnlockFps(new)</h4></summary>
                 <p>Sets the FPS cap if supported by the Roblox environment.</p>
                 <table>
@@ -420,7 +441,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">ButtonFunctions (<code>Fire()</code>, <code>Hide()</code>, <code>Show()</code>, <code>SetText(text)</code>, <code>Remove()</code>, <code>SetFunction(new)</code>)</td></tr>
                 </table>
             </details>
-            <details class="component">
+            <details class="component desktop-only">
                 <summary><h3>NewSection(text)</h3></summary>
                 <p>Creates a section header for organizing components.</p>
                 <table>
@@ -429,7 +450,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">SectionFunctions (<code>SetText(new)</code>, <code>Hide()</code>, <code>Show()</code>, <code>Remove()</code>)</td></tr>
                 </table>
             </details>
-            <details class="component">
+            <details class="component desktop-only">
                 <summary><h3>NewToggle(text, default, callback)</h3></summary>
                 <p>Creates a toggle switch with an optional keybind.</p>
                 <table>
@@ -440,7 +461,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">ToggleFunctions (<code>Toggle()</code>, <code>Remove()</code>, <code>Set(state)</code>, <code>GetValue()</code>, <code>SetFunction(new)</code>, <code>AddKeybind(default)</code>)</td></tr>
                 </table>
             </details>
-            <details class="component">
+            <details class="component desktop-only">
                 <summary><h3>NewKeybind(text, default, callback)</h3></summary>
                 <p>Creates a keybind input for binding keys to actions.</p>
                 <table>
@@ -451,7 +472,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">KeybindFunctions (<code>Fire()</code>, <code>SetFunction(new)</code>, <code>SetKey(new)</code>, <code>SetText(new)</code>, <code>Hide()</code>, <code>Show()</code>)</td></tr>
                 </table>
             </details>
-            <details class="component">
+            <details class="component desktop-only">
                 <summary><h3>NewTextbox(text, default, placeHolder, type, autoexec, autoclear, callback)</h3></summary>
                 <p>Creates a text input field with customizable size and behavior.</p>
                 <table>
@@ -466,7 +487,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">TextboxFunctions (<code>Input(new)</code>, <code>Fire()</code>, <code>SetFunction(new)</code>, <code>SetText(new)</code>, <code>Hide()</code>, <code>Show()</code>, <code>Remove()</code>, <code>SetPlaceHolder(new)</code>)</td></tr>
                 </table>
             </details>
-            <details class="component">
+            <details class="component desktop-only">
                 <summary><h3>NewSelector(text, default, list, callback)</h3></summary>
                 <p>Creates a dropdown menu for selecting options.</p>
                 <table>
@@ -478,7 +499,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">SelectorFunctions (<code>AddOption(new, callback)</code>, <code>RemoveOption(option)</code>, <code>SetFunction(new)</code>, <code>Text(new)</code>, <code>Hide()</code>, <code>Show()</code>, <code>Remove()</code>)</td></tr>
                 </table>
             </details>
-            <details class="component">
+            <details class="component desktop-only">
                 <summary><h3>NewSlider(text, suffix, compare, compareSign, values, callback)</h3></summary>
                 <p>Creates a slider for numerical input with a draggable indicator.</p>
                 <table>
@@ -492,7 +513,7 @@ Library:Init(Config)
                     <tr><td><strong>Returns</strong></td><td colspan="2">SliderFunctions (<code>Set(new, noCallback)</code>, <code>Max(new)</code>, <code>Min(new)</code>, <code>SetFunction(new)</code>, <code>GetValue()</code>, <code>SetText(new)</code>, <code>Hide()</code>, <code>Show()</code>, <code>Remove()</code>)</td></tr>
                 </table>
             </details>
-            <details class="component">
+            <details class="component desktop-only">
                 <summary><h3>NewSeperator()</h3></summary>
                 <p>Creates a horizontal separator for visual organization.</p>
                 <table>
@@ -502,7 +523,7 @@ Library:Init(Config)
             </details>
         </section>
 
-        <section id="visual-effects" class="fade-in">
+        <section id="visual-effects" class="fade-in desktop-only">
             <h2>Visual Effects</h2>
             <details class="method">
                 <summary><h4>:ApplyRainbow(instance, wave)</h4></summary>
@@ -528,7 +549,7 @@ Library:Init(Config)
             </details>
         </section>
 
-        <section id="examples" class="fade-in">
+        <section id="examples" class="fade-in desktop-only">
             <h2>Examples</h2>
             <h3>Full UI Implementation</h3>
             <p>Demonstrates a complete UI setup with introduction, watermark, notification, and components.</p>
@@ -595,7 +616,7 @@ end)
 </code></pre>
         </section>
 
-        <section id="troubleshooting" class="fade-in">
+        <section id="troubleshooting" class="fade-in desktop-only">
             <h2>Troubleshooting</h2>
             <p>Common issues and solutions when using XSX.</p>
             <ul>
@@ -619,6 +640,31 @@ end)
                 });
             }, { threshold: 0.1 });
             elements.forEach(element => observer.observe(element));
+            const isMobile = () => {
+                const userAgent = navigator.userAgent.toLowerCase();
+                const mobileRegex = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/;
+                const isSmallScreen = window.innerWidth <= 768;
+                return mobileRegex.test(userAgent) || isSmallScreen;
+            };
+            if (isMobile()) {
+                alert('This website isn\'t designed for mobile, please use a desktop computer!');
+                document.body.style.fontSize = '14px';
+                document.querySelector('.container').style.padding = '20px 10px';
+                document.querySelectorAll('.desktop-only').forEach(el => el.style.display = 'block');
+                const nav = document.querySelector('nav');
+                let lastScrollY = window.scrollY;
+                window.addEventListener('scroll', () => {
+                    const currentScrollY = window.scrollY;
+                    if (currentScrollY > 50) {
+                        nav.classList.add('hidden');
+                    } else {
+                        nav.classList.remove('hidden');
+                    }
+                    lastScrollY = currentScrollY;
+                });
+            } else {
+                document.querySelectorAll('.desktop-only').forEach(el => el.style.display = 'block');
+            }
         });
     </script>
 </body>
