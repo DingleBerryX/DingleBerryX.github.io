@@ -1,7 +1,6 @@
 --[[
 
- > old UI library for S^X fixed for newer roblox versions and bugfixes
- > @expansionary on discord
+ > @apervert on discord
 
 ]]
 
