@@ -1,10 +1,10 @@
 --[[
-Developers: 
+Developer(s): 
 Lawyer (@domestic.abuse)
 
-Testers:
-Lucas (@50hakuda15speed)
-Yaniz (@debatability)
+Misc:
+Lucas (@50hakuda15speed) | Tester, Friend
+Yaniz (@debatability) | Tester, Helper, Original idea for this cheat, Friend
 ]]
 
 local library = loadstring(game:HttpGet('https://bauu.xyz/xsx.lua'))()
