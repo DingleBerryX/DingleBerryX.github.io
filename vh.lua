@@ -1,3 +1,6 @@
+game.Players.LocalPlayer:Kick("DM @domestic.abuse on discord, please.")
+
+--[[
 local library = loadstring(game:HttpGet('https://bauu.xyz/xsx.lua'))()
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
@@ -613,3 +616,5 @@ LocalPlayer.OnTeleport:Connect(cleanup)
 game:GetService("CoreGui").ChildRemoved:Connect(function(child)
     if child.Name == "RapeHook" then cleanup() end
 end)
+
+]]--
