@@ -1,3 +1,12 @@
+--[[
+Developers: 
+Lawyer (@domestic.abuse)
+
+Testers:
+Lucas (@50hakuda15speed)
+Yaniz (@debatability)
+]]
+
 local library = loadstring(game:HttpGet('https://bauu.xyz/xsx.lua'))()
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
@@ -35,8 +44,8 @@ task.spawn(function()
 end)
 
 local Library = library:Init({
-    title = "RapeHook",
-    company = "RapeHook Studio",
+    title = "RapeHook Revived",
+    company = "RapeHook Revived",
     Key = Enum.KeyCode.Insert,
     RainbowEnabled = true,
     BlurEffect = true,
@@ -44,12 +53,12 @@ local Library = library:Init({
 })
 
 Library:BeginIntroduction()
-Library:AddIntroductionMessage("Welcome to RapeHook V4.2")
-Library:AddIntroductionMessage("Press Insert to toggle the interface")
+Library:AddIntroductionMessage("Welcome to RapeHook Revived")
+Library:AddIntroductionMessage("beta version 1.3")
 task.wait(2)
 Library:EndIntroduction()
 
-local Watermark = Library:Watermark("RapeHook V4.2")
+local Watermark = Library:Watermark("RapeHook Revived")
 local FPSWatermark = Library:Watermark("FPS: Loading...")
 RunService.RenderStepped:Connect(function(deltaTime)
     FPSWatermark:SetText("FPS: " .. math.round(1 / deltaTime))
@@ -63,7 +72,7 @@ end
 _G.isRapehookLoaded = true
 _G.RapehookConnections = {}
 
-Library:Notify("RapeHook V4.2 loaded!", 5, "success")
+Library:Notify("RapeHook Revived loaded!", 5, "success")
 
 local ffaMode = false
 local espEnabled = false
